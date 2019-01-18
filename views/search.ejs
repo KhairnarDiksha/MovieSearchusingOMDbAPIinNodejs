@@ -1,0 +1,65 @@
+<% include partials/header %>
+
+</head>
+<body>
+		<div class="col-sm-6">
+				<h1></h1>
+				<a href="/favMaovies" class="btn btn-danger" data-toggle="modal" id="fav"><span>favoriate</span></a>
+		</div>
+	</div>
+	</div>
+	<h3>Movies List</h3>
+	<div  style="overflow:auto;" id="export">
+			<table id="example" class="table table-striped table-hover" style="width:100%">
+					<thead>
+			<tr>
+				<th>Cover</th>
+				<th>Name</th>
+				<th>Year</th>
+				<th>Director</th>
+				<th>Cast</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id='Poster'></td>
+				<td id='title'></td>
+				<td id='Year'></td>
+				<td id='Director'></td>
+				<td id='Actors'></td>
+			</tr>
+		</tbody>
+		</table>
+		</div>
+	</div>
+
+</div>
+</body>
+
+
+<script>
+	
+$(document).ready(function() {
+// Setup - add a text input to each footer cell
+$('#example thead tr').clone(true).appendTo( '#example thead' );
+$('#example thead tr:eq(1) th').each( function (i) {
+var title = $(this).text();
+$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+$( 'input', this ).on( 'keyup change', function () {
+	if ( table.column(i).search() !== this.value ) {
+		table
+			.column(i)
+			.search( this.value )
+			.draw();
+	}
+} );
+} );
+var table = $('#example').DataTable( {
+orderCellsTop: true,
+fixedHeader: true
+} );		
+} );
+</script>
+
+</html>

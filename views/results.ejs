@@ -1,0 +1,89 @@
+<% include partials/header %>
+
+</head>
+<body>
+		<div class="col-sm-6">
+				<h1></h1>
+				<a href="/favMaovies" class="btn btn-danger" data-toggle="modal" id="fav"><span>favoriate</span></a>
+		</div>
+	</div>
+	</div>
+	
+					<div  style="overflow:auto;" id="export">
+
+					<table id="example" class="table table-striped table-hover" style="width:100%">
+							<thead>
+					<tr>
+						<th>favorites </th>
+						<th>Cover</th>
+						<th>Name</th>
+						<th>Year</th>
+						<th>Director</th>
+						<th>Cast</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% resultData['search'].forEach(function(movie){ %>
+					<tr>
+						<% var imdb_url = 'https://www.imdb.com/title/' + movie['imdbID'] %>
+						
+						<td>
+							<form action="/favorites" method="get">
+							<input type="hidden" name="fav" placeholder="search term" value="<%= movie['imdbID'] %>">
+							<button id="submit" type="submit"><i class="fa fa-heart-o btn btn-default" onclick="btnClick(this)" id="number" value=""></i></button>
+							</form>
+						</td>
+						<td id='Poster'><img src="<%= movie['Poster'] %>" alt="" style="width: 30%;	height: 20%;"></td>
+						<td id='title'><%= movie['Title'] %></td>
+						<td id='Year'><%= movie['Year'] %></td>
+						<td id='Director'><%= movie['Director'] %></td>
+						<td id='Actors'><%= movie['Actors'] %></td>
+					</tr>
+					<% }) %>
+				</tbody>
+				</table>
+				</div>
+			</div>
+
+		</div>
+
+</body>
+
+
+<script>
+
+function btnClick(x) {
+		
+  if (x.classList[1]== 'fa-heart-o' || x.classList[3]== 'fa-heart-o' ) {
+    x.classList.remove('fa-heart-o');
+		x.classList.add('fa-heart');
+	}
+	 else if(x.classList[3] == 'fa-heart'){
+		x.classList.remove('fa-heart');
+    	x.classList.add('fa-heart-o');
+	 }
+}
+$(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#example thead tr').clone(true).appendTo( '#example thead' );
+    $('#example thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+    var table = $('#example').DataTable( {
+        orderCellsTop: true,
+        fixedHeader: true
+		} );		
+} );
+</script>
+
+</html>
