@@ -18,7 +18,9 @@ var resultData = {'search':[]};
                  data.Search.forEach(function(table) {
                     var imdbID = table.imdbID;
                     var Fullurl = 'https://www.omdbapi.com/?i=' + imdbID + '&apikey=bae2fed8';
-                    request(Fullurl, function(error1, response1, body1){
+                    request(
+                        Fullurl, 
+                        function(error1, response1, body1){
                     if(!error1 && response1.statusCode == 200){
                         var data1 = JSON.parse(body1)
                         resultData.search.push(data1);
@@ -58,7 +60,8 @@ app.get('/favorites', function(req, res){
                    }  
                }  
                if(count == 1){
-                favData = {'search':[]};
+                favData.search.push(data);
+
                }
             }
         }            
@@ -79,9 +82,7 @@ app.get('/remove', function(req, res){
        if(cluster == query){
         favData.search.splice(i,i)
        }  
-      
-    }     
-    
+    }         
      res.render('favourite', {resultsData: favData});
 });
  app.listen(3000, function(){

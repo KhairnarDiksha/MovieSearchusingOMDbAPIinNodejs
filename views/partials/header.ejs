@@ -266,7 +266,52 @@
     			margin-top: 21px;
 
 			}
-        </style>
+			#posterID{
+				width: 10%;
+			}
+		</style>
+		<script>
+
+			var favorites = {'search':[]};
+			
+			function btnClick(x) {
+					
+			  if (x.classList[1]== 'fa-heart-o' || x.classList[3]== 'fa-heart-o' ) {
+				x.classList.remove('fa-heart-o');
+					x.classList.add('fa-heart');
+				}
+				 else if(x.classList[3] == 'fa-heart'){
+					x.classList.remove('fa-heart');
+					x.classList.add('fa-heart-o');
+				 }
+			}
+			$(document).ready(function() {
+				// Setup - add a text input to each footer cell
+				$('#example thead tr').clone(true).appendTo( '#example thead' );
+				$('#example thead tr:eq(1) th').each( function (i) {
+					var title = $(this).text();
+					if(title!='')
+					{
+					$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+					
+					$( 'input', this ).on( 'keyup change', function () {
+						if ( table.column(i).search() !== this.value ) {
+							table
+								.column(i)
+								.search( this.value )
+								.draw();
+						}
+					} );}
+				} );
+				
+				var table = $('#example').DataTable( {
+					orderCellsTop: true,
+					fixedHeader: true,
+					
+			
+					} );		
+			} );
+			</script>
 		
         <div class="container testimonial-group">
 				<div class="table-wrapper">
