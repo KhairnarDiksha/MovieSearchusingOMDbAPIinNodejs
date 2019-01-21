@@ -79,9 +79,17 @@ app.get('/remove', function(req, res){
     for (i = 0; i < favData.search.length; i++)
     {              
        cluster = favData.search[i].imdbID;
+    //    console.log(favData.search.length)
+    //     console.log(favData.search[i])
+    //     console.log(i)
+        if(favData.search.length==1 && cluster == query){
+                console.log("last item")
+                delete favData.search[i]
+        }
        if(cluster == query){
         favData.search.splice(i,i)
        }  
+
     }         
      res.render('favourite', {resultsData: favData});
 });
