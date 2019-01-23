@@ -23,7 +23,9 @@
 					</tr>
 				</thead>
 				<tbody>
+						
 					<% resultData['search'].forEach(function(movie){ %>
+						
 					<tr>
 						<% var imdb_url = 'https://www.imdb.com/title/' + movie['imdbID'] %>
 						
@@ -32,6 +34,7 @@
 							<input type="hidden" name="fav" placeholder="search term" value="<%= movie['imdbID'] %>">
 							<button id="submit" type="submit"><i class="fa fa-heart-o btn btn-default" onclick="btnClick(this)" id="number" value=""></i></button>
 							</form>
+							
 						</td>
 						<td id='Poster'><img src="<%= movie['Poster'] %>" alt="<%= movie['Title'] %>" style="	height: 20%;"></td>
 						<td id='title'><%= movie['Title'] %></td>
